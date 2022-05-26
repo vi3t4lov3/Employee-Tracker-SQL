@@ -2,6 +2,7 @@ const express = require('express');
 const inquirer = require("inquirer");
 const getDatabase = require("./routes/database");
 const {menu, } = require("./assets/question");
+const db = require("./assets/config");
 
 
 const app = express();
@@ -16,7 +17,7 @@ function init() {
     inquirer.prompt(menu).then((answer) => {
         switch (answer.choice) {
 
-            case 'VIEW ALL EMPLOYEES': viewEmployees();
+            case 'VIEW ALL EMPLOYEES': viewEmployees ();
                 break;
             case 'VIEW ALL ROLES': viewRoles();
                 break;
@@ -36,12 +37,40 @@ function init() {
     })
 }
 
+//view the employees
+function viewEmployees () {
+    const sql = "SELECT * FROM employee";
+    db.query(sql, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        console.log("---------------------------------------------");
+        console.log("OUR EMPLOYEES LISTING BELOW");
+        console.table(res);
+        inquirer.prompt([{
+                type: 'list',
+                name: 'choice',
+                message: 'PLEASE SELECT AN OPTION',
+                choices: ['MAIN MENU', 'EXIT']
+            }]).then((answer) => {
+            switch (answer.choice) {
+                case 'MAIN MENU': init();
+                    break;
+                case 'EXIT': Exit();
+                    break;
+            }
+        });
+    });
+};
 
+//exit the menu
 function Exit() {
     console.log('Goodbye! Thank you for using the service');
     process.exit();
 }
 
-
-init()
 app.listen(PORT, () => console.log(`Server start ${PORT}`));
+
+
+//initial
+init()

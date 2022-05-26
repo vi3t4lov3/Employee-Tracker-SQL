@@ -1,21 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require("mysql2");
-
-//connect database using mysql2
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'MyCompany'
-})
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log(`Connected to datatbase`);
-    
-});
+const inquirer = require("inquirer");
+const {db} = require("../assets/config")
 
 //Router get all the Employee
 router.get('/employees', (req, res) => {
