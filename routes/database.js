@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const inquirer = require("inquirer");
-const {db} = require("../assets/config")
+const db = require("../assets/config");
 
 //Router get all the Employee
 router.get('/employees', (req, res) => {

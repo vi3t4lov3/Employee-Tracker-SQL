@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3305;
 
 //Router To Get Database
-app.use('/db', getDatabase )
+app.use('/data', getDatabase )
 
 //init function
 //view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
@@ -63,13 +63,65 @@ function viewEmployees () {
     });
 };
 
+//View roles
+function viewRoles() {
+    const sql = "SELECT * FROM roles";
+    db.query(sql, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        console.log("---------------------------------------------");
+        console.log("OUR COMPANY HAVE ROLES LISTING BELOW");
+        console.table(res);
+        inquirer.prompt([{
+                type: 'list',
+                name: 'choice',
+                message: 'PLEASE SELECT AN OPTION',
+                choices: ['MAIN MENU', 'EXIT']
+            }]).then((answer) => {
+            switch (answer.choice) {
+                case 'MAIN MENU': init();
+                    break;
+                case 'EXIT': Exit();
+                    break;
+            }
+        });
+    });
+};
+
+//View department
+function viewDepartments() {
+    const sql = "SELECT * FROM department";
+    db.query(sql, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        console.log("---------------------------------------------");
+        console.log("OUR COMPANY DEPARTMENTS LISTING BELOW");
+        console.table(res);
+        inquirer.prompt([{
+                type: 'list',
+                name: 'choice',
+                message: 'PLEASE SELECT AN OPTION',
+                choices: ['MAIN MENU', 'EXIT']
+            }]).then((answer) => {
+            switch (answer.choice) {
+                case 'MAIN MENU': init();
+                    break;
+                case 'EXIT': Exit();
+                    break;
+            }
+        });
+    });
+};
+
 //exit the menu
 function Exit() {
     console.log('Goodbye! Thank you for using the service');
     process.exit();
 }
 
-app.listen(PORT, () => console.log(`Server start ${PORT}`));
+app.listen(PORT, () => console.log(`\n SERVER START AT PORT ${PORT}`));
 
 
 //initial

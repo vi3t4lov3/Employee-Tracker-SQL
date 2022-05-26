@@ -11,7 +11,7 @@ db.connect((err) => {
     if (err) {
         throw err;
     }
-    console.log(`CONNECTED SUCCESSED TO SERVER`);
+    console.log(`AND HAD CONNECT SUCCESSED TO SERVER`);
     
 });
 

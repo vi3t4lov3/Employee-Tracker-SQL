@@ -34,6 +34,9 @@ You can run a local copy of this site by issuing the following commands.
 ```bash
 $ git clone https://github.com/vi3t4lov3/Employee-Tracker-SQL.git
 $ cd Employee-Tracker-SQL
+$ Dont forget to run SOURCE schema.sql & seeds.sql in db folder
+$ run npm init 
+$ npm node .
 ```
 
 ## Usage
