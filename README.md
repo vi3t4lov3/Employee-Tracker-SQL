@@ -77,11 +77,13 @@ NO TEST THIS TIME
 
 ## Demo
 
-[Click here] (https://thawing-ridge-75547.herokuapp.com)
-
 ![imagename](./assets/img/img1.png)
 
 ![imagename](./assets/img/img2.png)
+
+![imagename](./assets/img/img3.png)
+
+![imagename](./assets/img/img4.png)
 
 ## Questions
 
