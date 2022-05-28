@@ -57,7 +57,7 @@ const employeeQuestion = (roles, managers) => {
 const departmentQuestion = [{
     name: 'department_name',
     type: 'input',
-    message: `PLEASE INSERT DEPARTMENT NAME?`
+    message: `PLEASE INSERT DEPARTMENT NAME`
 }];
 
 //add roles
@@ -66,15 +66,15 @@ const roleQuestion = (departments) => {
         {
             name: 'title',
             type: 'input',
-            message: `What is the name of this role?`
+            message: `WHAT IS THE NAME OF THIS ROLE?`
         }, {
             name: 'salary',
             type: 'input',
-            message: `What is the salary of this role(type number)?`
+            message: `WHAT IS THE SALARY OF THIS ROLE(TYPE NUMBER)?`
         }, {
             name: 'department_id',
             type: 'list',
-            message: `Which department is this role belonging to?`,
+            message: `WHICH DEPARTMENT IS THIS ROLE BELONGING TO?`,
             // connect departments from the db
             choices: departments
         }
@@ -86,12 +86,12 @@ return [
     {
         name: 'update',
         type: 'list',
-        message: 'Update Employee option',
+        message: 'UPDATE EMPLOYEE OPTION',
         choices: employeeList
     }, {
         name: 'role',
         type: 'list',
-        message: 'Pick a new role',
+        message: 'PICK A NEW ROLE',
         choices: roleLists
     }
 ];

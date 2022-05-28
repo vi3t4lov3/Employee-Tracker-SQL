@@ -156,8 +156,21 @@ function addDepartment() {
     inquirer.prompt(departmentQuestion)
     .then((response) => {
         const insertDepartment = 'INSERT INTO department(department_name) VALUES(?);'
-        db.query(insertDepartment, response.department_name)
+        db.query(insertDepartment, response.department_name, (err, res) => {
+            if (err) {
+                throw err;
+            }
+        inquirer.prompt(optionsSelect)
+        .then((answer) => {
+            switch (answer.choice) {
+                case 'MAIN MENU': init();
+                    break;
+                case 'EXIT': Exit();
+                    break;
+            }
+        })
     })
+ })
 };
 //update department
 function updateDepartment() {
