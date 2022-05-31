@@ -9,7 +9,7 @@ Build a command-line application from scratch to manage a company's employee dat
 
 ## Table of Contents
 
-- [Node Taker](#node-taker)
+- [Employee Tracker](#employee-tracker)
   - [Description](#description)
   - [Table of Contents](#table-of-contents)
   - [Dependencies](#dependencies)
@@ -77,6 +77,8 @@ NO TEST THIS TIME
 
 ## Demo
 ![imagename](./assets/img/demo.gif)
+
+[Click here] (https://www.youtube.com/watch?v=UIhtvwJXsDs) 
 
 ![imagename](./assets/img/img1.png)
 
