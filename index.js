@@ -4,7 +4,7 @@ const getDatabase = require("./routes/database");
 const {menu, 
     optionsSelect, 
     employeeQuestion, 
-    updateEmployee, 
+    updateEmployeeQuestion, 
     departmentQuestion, 
     roleQuestion } = require("./assets/question");
 const db = require("./assets/config");
@@ -64,7 +64,7 @@ function viewEmployees () {
 //View roles
 function viewRoles() {
     const sql = "SELECT * FROM roles";
-    db.query(sql, function (err, res) {
+    db.query(sql, (err, res) => {
         if (err) {
             throw err;
         }
@@ -85,7 +85,7 @@ function viewRoles() {
 //View department
 function viewDepartments() {
     const sql = "SELECT * FROM department";
-    db.query(sql, function (err, res) {
+    db.query(sql, (err, res) => {
         if (err) {
             throw err;
         }
@@ -148,17 +148,17 @@ function addEmployee() {
 //add role
 function addRole() {
     const sqlRole = "SELECT * FROM department";
-    db.query(sqlRole, function (err, res) {
+    db.query(sqlRole, (err, res) => {
         if (err) {
             throw err;
         }
         const department = res.map((d) => ({
             name: d.department_name, value: d.id}));
         inquirer.prompt(roleQuestion(department))
-        .then(function (response) {
+        .then((response) => {
             db.query('INSERT INTO roles(title, salary, department_id) VALUES (?,?,?)', [
                 response.title, response.salary, response.department_id
-            ], function (err, res) {
+            ], (err, res) => {
                 if (err) {
                     throw err;
                 }
@@ -196,10 +196,42 @@ function addDepartment() {
     })
  })
 };
-//update department
-function updateDepartment() {
-
-};
+//update employee
+function updateEmployee() {
+    const sqlEmployees = "SELECT * FROM employee;";
+    const sqlRole = "SELECT * FROM roles;"
+    db.query(sqlEmployees, (err, res) => {
+        if (err) {
+            throw err;
+        }
+        const employeeList = res.map((e) => ({name: `${
+                e.first_name
+            } ${
+                e.last_name
+            }`, value: e.id}));
+        db.query(sqlRole, (err, res) => {
+            if (err) {
+                throw err;
+            }
+        const roleLists = res.map((r) => ({name: r.title, value: r.id}));
+        inquirer.prompt(updateEmployeeQuestion(employeeList, roleLists)).then((response) => {
+            db.query(`UPDATE employee SET role_id = ${response.role} WHERE id= ${response.update}`,(err,res) => {
+                if (err) {
+                    throw err;
+                }   
+                inquirer.prompt(optionsSelect).then((answer) => {
+                switch (answer.choice) {
+                    case 'MAIN MENU': init();
+                        break;
+                    case 'EXIT': Exit();
+                        break;
+                }
+            });
+        });
+    });
+});
+});
+}
 //exit the menu
 function Exit() {
     console.log('GOODBYE! THANK YOU FOR USING OUR SERVICE');

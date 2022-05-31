@@ -81,7 +81,7 @@ const roleQuestion = (departments) => {
     ];
 }
 //update employee
-const updateEmployee = (employeeList, roleLists) => {
+const updateEmployeeQuestion = (employeeList, roleLists) => {
 return [
     {
         name: 'update',
@@ -99,7 +99,7 @@ return [
 module.exports = {
     menu,
     employeeQuestion,
-    updateEmployee,
+    updateEmployeeQuestion,
     departmentQuestion,
     roleQuestion,
     optionsSelect
