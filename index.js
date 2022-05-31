@@ -117,8 +117,7 @@ function addEmployee() {
             throw err;
         }
         const roles = res.map((r) => ({name: `${r.title}`, value: r.id}));
-        const addEmployeeQuestions = employeeQuestion(roles, employees);
-        inquirer.prompt(addEmployeeQuestions) 
+        inquirer.prompt(employeeQuestion(roles, employees)) 
         .then((response) => {
             const insertEmployeeQuery = 'INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
             db.query(insertEmployeeQuery, [
@@ -148,8 +147,33 @@ function addEmployee() {
 };
 //add role
 function addRole() {
-
-};
+    const sqlRole = "SELECT * FROM department";
+    db.query(sqlRole, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        const department = res.map((d) => ({
+            name: d.department_name, value: d.id}));
+        inquirer.prompt(roleQuestion(department))
+        .then(function (response) {
+            db.query('INSERT INTO roles(title, salary, department_id) VALUES (?,?,?)', [
+                response.title, response.salary, response.department_id
+            ], function (err, res) {
+                if (err) {
+                    throw err;
+                }
+                inquirer.prompt(optionsSelect).then((answer) => {
+                    switch (answer.choice) {
+                        case 'MAIN MENU': init();
+                            break;
+                        case 'EXIT': Exit();
+                            break;
+                    }
+                });
+            });
+        });
+    });
+}
 //add department
 function addDepartment() {
     const sqlDepartment = "SELECT * FROM department;";
