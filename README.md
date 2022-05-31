@@ -76,6 +76,7 @@ NO TEST THIS TIME
 ```
 
 ## Demo
+![imagename](./assets/img/demo.gif)
 
 ![imagename](./assets/img/img1.png)
 

@@ -70,11 +70,17 @@ const roleQuestion = (departments) => {
         }, {
             name: 'salary',
             type: 'input',
-            message: `WHAT IS THE SALARY OF THIS ROLE(TYPE NUMBER)?`
+            message: `WHAT IS THE SALARY OF THIS ROLE(TYPE NUMBER)?`,
+            validate: (answer) => {
+                if (answer.match(/^[1-9]\d*$/)){
+                    return true;
+                }
+                return "Please only enter numbers.";
+            }
         }, {
             name: 'department_id',
             type: 'list',
-            message: `WHICH DEPARTMENT IS THIS ROLE BELONGING TO?`,
+            message: `WHICH DEPARTMENT IS THIS ROLE BELONG TO?`,
             // connect departments from the db
             choices: departments
         }
@@ -91,7 +97,7 @@ return [
     }, {
         name: 'role',
         type: 'list',
-        message: 'PICK A NEW ROLE',
+        message: 'PLEASE PICK A NEW ROLE',
         choices: roleLists
     }
 ];
